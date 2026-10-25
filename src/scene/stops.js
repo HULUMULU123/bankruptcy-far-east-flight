@@ -132,10 +132,10 @@ export function createStops({ scene, camera, A, landmarks, meta, program, rig, r
         float col = mod(uIdx, 6.0), row = floor(uIdx / 6.0);
         vec2 uv = vec2((col + (cell.x + 0.5) / uDens) / 6.0, 1.0 - (row + 1.0 - (cell.y + 0.5) / uDens) / 4.0);
         float lum = clamp((texture2D(uTex, uv).r - 0.08) * 1.05, 0.0, 1.0);
-        float r = pow(lum, 0.85) * 0.5;
+        float r = pow(lum, 0.9) * 0.42;
         float d = length(f - off);
         float a = (1.0 - smoothstep(r - 0.06, r + 0.04, d)) * uA * smoothstep(0.02, 0.3, lum);
-        gl_FragColor = vec4(vec3(0.91, 0.933, 0.94), a);
+        gl_FragColor = vec4(mix(vec3(0.03, 0.04, 0.045), vec3(0.91, 0.933, 0.94), clamp(a, 0.0, 1.0)), max(a, 0.78 * uA));
       }`,
   }));
   portrait.renderOrder = 40; portrait.visible = false; scene.add(portrait);
@@ -181,9 +181,15 @@ export function createStops({ scene, camera, A, landmarks, meta, program, rig, r
     portrait.visible = show;
     if (show) {
       const b = beacons[idx], mat = portrait.material.uniforms;
-      const dist = Math.hypot(b.x - camera.position.x, b.z - camera.position.z, b.top - camera.position.y); portrait.position.set(b.x, b.top + 58 + dist * 0.12, b.z); portrait.quaternion.copy(camera.quaternion); portrait.scale.setScalar(Math.max(dist * (innerWidth < 700 ? 0.13 : 0.19), 28));
+      const dist = Math.hypot(b.x - camera.position.x, b.z - camera.position.z, b.top - camera.position.y); portrait.position.set(b.x, b.top + 58 + dist * 0.16, b.z); portrait.quaternion.copy(camera.quaternion); { // размер портрета задаётся в пикселях экрана: на телефоне — крупный и чёткий, плотность точек ~ 4 px на точку
+        const px = innerWidth < 700 ? Math.min(innerWidth * 0.62, 260) : 300, wpp = (2 * dist * Math.tan((camera.fov * Math.PI) / 360)) / innerHeight;
+        portrait.scale.setScalar(px * wpp);
+        if (innerWidth < 700) { // телефон: портрет закреплён по центру верхней части экрана, линия-выноска ведёт к маячку
+          const D = 70, w2 = (2 * D * Math.tan((camera.fov * Math.PI) / 360)) / innerHeight; camera.getWorldDirection(bv); const up = new THREE.Vector3(0, 1, 0).applyQuaternion(camera.quaternion);
+          portrait.position.copy(camera.position).addScaledVector(bv, D).addScaledVector(up, (innerHeight * 0.5 - px * 0.5 - 92) * w2); portrait.scale.setScalar(px * w2); }
+        mat.uDens.value = Math.round(px / (hover.idx === idx ? 2.6 : 3.6)); }
       mat.uIdx.value = b.sp.photo; mat.uT.value = Math.min((now - near.t0) / 600, 1); mat.uT.value = 1 - (1 - mat.uT.value) ** 3;
-      mat.uDens.value = hover.idx === idx ? 170 : 96; mat.uA.value = sm(S3.pStart, S3.pStart + 0.02, P) * (1 - sm(S3.pEnd - 0.012, S3.pEnd + 0.008, P));
+       mat.uA.value = sm(S3.pStart, S3.pStart + 0.02, P) * (1 - sm(S3.pEnd - 0.012, S3.pEnd + 0.008, P));
     }
   }
   return { update, setDay, state };

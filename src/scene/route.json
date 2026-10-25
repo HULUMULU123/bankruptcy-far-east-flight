@@ -274,13 +274,21 @@
  },
  "maxAngularDegPerSec": 22,
  "maxAngularDegPerSecScatter": 70,
- "pages": 30,
- "scrollWeights": [
-  1.6,
-  3.2,
-  4.8,
-  6.5,
-  3.4,
-  1.8
- ]
+ "scroll": {
+  "stops": [
+   3,
+   7,
+   12,
+   14,
+   6,
+   2.5
+  ],
+  "gaps": [
+   2,
+   2.5,
+   2.2,
+   2.2,
+   2
+  ]
+ }
 }

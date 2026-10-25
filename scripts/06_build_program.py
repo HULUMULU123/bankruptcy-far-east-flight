@@ -36,7 +36,7 @@ for pi, n in enumerate(PHOTO_NAMES):
     speakers.append({**people[n], "id": f"sp{pi + 1:02d}", "photo": pi})
 
 # атлас: лицо и плечи (верхняя часть карточки без подписи), серая шкала, автоконтраст; 6×4 по 256 px
-T = 256; atlas = Image.new("L", (T * 6, T * 4), 0)
+T = 384; atlas = Image.new("L", (T * 6, T * 4), 0)
 for i in range(24):
     im = Image.open(ROOT / f"scripts/cache/speakers/{i + 1:02d}.png").convert("RGBA")
     bg = Image.new("RGBA", im.size, (0, 0, 0, 255)); im = Image.alpha_composite(bg, im).convert("L")

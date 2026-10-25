@@ -143,7 +143,7 @@ const bootT0 = performance.now();
 const sm01 = (t) => { t = Math.min(Math.max(t, 0), 1); return t * t * (3 - 2 * t); };
 const easeOut = (t) => 1 - (1 - t) ** 3;
 
-const scroll = createScroll({ stops, reduced, rate: (P) => rig.rateAt(P), cap: (P) => (rig.state(P).scatter > 0.05 ? route.maxAngularDegPerSecScatter : route.maxAngularDegPerSec), weights: route.scrollWeights, pages: route.pages * (innerWidth < 700 ? 2.4 : 1), nominal: innerWidth < 700 ? 0.8 : 1.2, tau: innerWidth < 700 ? 0.16 : 0.1, onProgress(P, dt, touched) {
+const scroll = createScroll({ stops, reduced, rate: (P) => rig.rateAt(P), cap: (P) => (rig.state(P).scatter > 0.05 ? route.maxAngularDegPerSecScatter : route.maxAngularDegPerSec), weights: route.scroll, pages: innerWidth < 700 ? 2 : 1, nominal: innerWidth < 700 ? 0.8 : 1.2, tau: innerWidth < 700 ? 0.16 : 0.1, onProgress(P, dt, touched) {
   const pose = rig.at(P), st = rig.state(P);
   // камера — чистая функция от P: остановился скролл, остановилась и камера (никаких догоняющих поворотов)
   camera.position.copy(pose.pos);
@@ -200,7 +200,7 @@ addEventListener('keydown', (e) => {
   if (e.key === 'Home') to = 0; if (e.key === 'End') to = stops.length - 1;
   if (to !== null) { e.preventDefault(); scroll.flyToStop(to, 1200 + 800 * Math.min(1, Math.abs(scroll.centers[to] - scroll.P) / 0.5)); }
 });
-['wheel', 'touchstart'].forEach((t) => addEventListener(t, () => scroll.cancelFlight(), { passive: true }));
+
 
 document.getElementById('loader').classList.add('done'); setTimeout(() => document.getElementById('loader')?.remove(), 400);
 let fps = 0, frames = 0, tf = performance.now();
