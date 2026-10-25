@@ -140,7 +140,7 @@ export function createStops({ scene, camera, A, landmarks, meta, program, rig, r
   }));
   portrait.renderOrder = 40; portrait.visible = false; scene.add(portrait);
   const hover = { idx: -1 }, near = { idx: -1, t0: 0 };
-  const tag = callouts.add({ id: 'speaker-tag', getWorld: () => new THREE.Vector3(beacons[Math.max(near.idx, 0)].x, beacons[Math.max(near.idx, 0)].top + 70, beacons[Math.max(near.idx, 0)].z), title: '', sub: '', dx: 70, dy: -40, win: [S3.pStart, S3.pEnd], fade: 0.01 });
+  const tag = callouts.add({ id: 'speaker-tag', getWorld: () => new THREE.Vector3(beacons[Math.max(near.idx, 0)].x, beacons[Math.max(near.idx, 0)].top + 70, beacons[Math.max(near.idx, 0)].z), title: '', sub: '', dx: 70, dy: -40, win: [S3.pStart, S3.pEnd], fade: 0.01, place: (W, H) => (W < 700 ? [12, H * 0.84] : null) });
   const tagN = tag.el.querySelector('.co__n'), tagS = tag.el.querySelector('.co__s') ?? (() => { const s = document.createElement('span'); s.className = 'co__s'; tag.el.append(s); return s; })();
   const spPanel = (sp) => ({ title: sp.name, sub: sp.moderator ? 'Модератор' : 'Спикер', html: true, body: [`<p>${sp.role}</p>${sp.talks.map((t) => `<p><em>${t.title}</em></p>`).join('')}<p class="dim">${sp.sessions.map((id) => { const s = program.sessions.find((x) => x.id === id); return `${s.day === 1 ? '29' : '30'} июля, ${s.start}–${s.end}: ${s.shortTitle}`; }).join('<br>')}</p>`] });
   const v = new THREE.Vector3();
@@ -181,7 +181,7 @@ export function createStops({ scene, camera, A, landmarks, meta, program, rig, r
     portrait.visible = show;
     if (show) {
       const b = beacons[idx], mat = portrait.material.uniforms;
-      const dist = Math.hypot(b.x - camera.position.x, b.z - camera.position.z, b.top - camera.position.y); portrait.position.set(b.x, b.top + 58 + dist * 0.12, b.z); portrait.quaternion.copy(camera.quaternion); portrait.scale.setScalar(Math.max(dist * 0.19, 34));
+      const dist = Math.hypot(b.x - camera.position.x, b.z - camera.position.z, b.top - camera.position.y); portrait.position.set(b.x, b.top + 58 + dist * 0.12, b.z); portrait.quaternion.copy(camera.quaternion); portrait.scale.setScalar(Math.max(dist * (innerWidth < 700 ? 0.13 : 0.19), 28));
       mat.uIdx.value = b.sp.photo; mat.uT.value = Math.min((now - near.t0) / 600, 1); mat.uT.value = 1 - (1 - mat.uT.value) ** 3;
       mat.uDens.value = hover.idx === idx ? 170 : 96; mat.uA.value = sm(S3.pStart, S3.pStart + 0.02, P) * (1 - sm(S3.pEnd - 0.012, S3.pEnd + 0.008, P));
     }

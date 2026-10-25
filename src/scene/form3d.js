@@ -35,11 +35,20 @@ export function createForm3D({ camera, program }) {
   });
   const obj = new CSS3DObject(el); scene.add(obj);
   const place = (pos, lookAt) => { obj.position.copy(pos); obj.lookAt(lookAt); };
+  // на десктопе форма стоит в мире; на телефоне fit() каждый кадр ставит её в экранные координаты
   // масштаб подбирается каждый кадр: форма занимает ~34% ширины экрана и целиком помещается по высоте
+  const dirV = new THREE.Vector3(), upV = new THREE.Vector3();
   function fit(W, H) {
+    const narrow = W < 700, h = el.offsetHeight || 560;
+    if (narrow) {   // телефон: форма — «нижний лист» параллельно экрану, чтобы не закрывать маяк
+      const D = 60, wpp = (2 * D * Math.tan((camera.fov * Math.PI) / 360)) / H, sc = Math.min((W * 0.9) / 380, (H * 0.5) / h) * wpp;
+      camera.getWorldDirection(dirV); upV.set(0, 1, 0).applyQuaternion(camera.quaternion);
+      obj.position.copy(camera.position).addScaledVector(dirV, D).addScaledVector(upV, -(0.5 * H - 0.5 * h * (sc / wpp) - 14) * wpp * 0.0 - (H * 0.5 - (h * sc) / wpp / 2 - 12) * wpp);
+      obj.quaternion.copy(camera.quaternion); obj.scale.setScalar(sc); return;
+    }
     const dist = camera.position.distanceTo(obj.position), worldPerPx = (2 * dist * Math.tan((camera.fov * Math.PI) / 360)) / H;
-    const narrow = W < 700, w = narrow ? W * 0.66 : Math.min(Math.max(W * 0.25, 300), 380), h = el.offsetHeight || 560;
-    obj.scale.setScalar((Math.min(w, (H * (narrow ? 0.82 : 0.6) * 380) / h) / 380) * worldPerPx);
+    const w = Math.min(Math.max(W * 0.25, 300), 380);
+    obj.scale.setScalar((Math.min(w, (H * 0.6 * 380) / h) / 380) * worldPerPx);
   }
   const nrm = new THREE.Vector3(), toCam = new THREE.Vector3();
   const facing = () => { nrm.set(0, 0, 1).applyQuaternion(obj.quaternion); toCam.copy(camera.position).sub(obj.position).normalize(); return nrm.dot(toCam); };

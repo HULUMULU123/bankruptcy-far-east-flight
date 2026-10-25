@@ -28,10 +28,11 @@ export function createCallouts(root, camera) {
       if (!vis) continue;
       const x = (v.x * 0.5 + 0.5) * W, y = (-v.y * 0.5 + 0.5) * H;
       let lx = x + it.dx, ly = y + it.dy;
-      if (it.place) [lx, ly] = it.place(W, H);
+      const pl = it.place ? it.place(W, H) : null;
+      if (pl) [lx, ly] = pl;
       else { const w = it.el.offsetWidth || 240; if (lx + w > W - 10) lx = Math.max(10, W - 10 - w); if (lx < 10) lx = 10; ly = Math.min(Math.max(ly, 76), H - 40); }                       // колонка подписей на фиксированных местах экрана: без наложений
       it.el.style.opacity = a; it.el.style.transform = `translate(${lx}px, ${ly}px) translate(0, -50%) translateY(${(1 - a) * 8}px)`;
-      it.line.setAttribute('x1', x); it.line.setAttribute('y1', y); it.line.setAttribute('x2', lx + (it.place ? it.el.offsetWidth : 0)); it.line.setAttribute('y2', ly); it.line.style.opacity = a;
+      it.line.setAttribute('x1', x); it.line.setAttribute('y1', y); it.line.setAttribute('x2', lx + (pl ? it.el.offsetWidth : 0)); it.line.setAttribute('y2', ly); it.line.style.opacity = a;
       it.dot.setAttribute('cx', x); it.dot.setAttribute('cy', y); it.dot.style.opacity = a;
       it.el.style.pointerEvents = a > 0.6 && it.el.tagName === 'BUTTON' ? 'auto' : 'none';
     }
