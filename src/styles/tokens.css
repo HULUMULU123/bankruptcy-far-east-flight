@@ -1,0 +1,27 @@
+:root {
+  --bg: #07090b;
+  --surface: #0e1215;
+  --surface-2: #151a1e;
+  --line-ui: rgba(232, 238, 240, 0.1);
+  --ink: #e8eef0;
+  --ink-2: #9aa7ad;
+  --accent: #21a038;
+  --accent-ink: #2fbd4c;
+
+  --f-body: "Onest Variable", "Onest", system-ui, sans-serif;
+  --f-mono: "JetBrains Mono Variable", ui-monospace, Menlo, monospace;
+
+  --fs-meta: 12px;
+  --fs-2: 14px;
+  --fs-1: 16px;
+  --fs-h3: 19px;
+  --fs-h2: 23px;
+  --fs-h1: 33px;
+  --fs-display: 48px;
+
+  --s-1: 4px; --s-2: 8px; --s-3: 12px; --s-4: 16px; --s-6: 24px; --s-8: 32px; --s-12: 48px;
+
+  --t-fast: 150ms; --t-base: 200ms; --t-slow: 300ms;
+  --e-in: cubic-bezier(0.4, 0, 1, 1);
+  --e-out: cubic-bezier(0, 0, 0.2, 1);
+}

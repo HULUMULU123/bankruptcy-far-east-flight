@@ -1,0 +1,82 @@
+{
+ "_source": "https://bankrufeast.ru/en (manual extract for M4); untranslated strings are marked TODO(content)",
+ "ui": {
+  "nav": [
+   "About",
+   "Program",
+   "Speakers",
+   "Register",
+   "Contacts"
+  ],
+  "skip": "Skip the flight",
+  "restart": "Start over",
+  "broadcastTitle": "Live stream",
+  "broadcast": [
+   "Stream 1",
+   "Stream 2"
+  ],
+  "close": "Close",
+  "progress": "Flight progress",
+  "loading": "Loading"
+ },
+ "hero": {
+  "title": "Bankruptcy Far East",
+  "titleEn": "Bankruptcy Far East",
+  "subtitle": "International forum",
+  "dates": "July 29–30, 2026",
+  "venue": "VLADIVOSTOK Grand Hotel&Spa",
+  "ctaParticipate": "Register",
+  "ctaBroadcast": "Watch live stream",
+  "scrollHint": "TODO(content) Scroll down"
+ },
+ "finale": {
+  "addressPanel": [
+   "VLADIVOSTOK Grand Hotel&Spa",
+   "10 Korabelnaya Embankment St.",
+   "Vladivostok, 690091"
+  ],
+  "contacts": [
+   {
+    "name": "Olga Korenkova",
+    "email": "OPKorenkova@sberbank.ru",
+    "phone": "+7 (914) 202 49 92",
+    "address": "12 Gamarnika St., Khabarovsk"
+   },
+   {
+    "name": "Oleg Ilyin",
+    "email": "ogiliin@sberbank.ru",
+    "phone": "+7 (914) 158 13 11",
+    "address": "12 Gamarnika St., Khabarovsk"
+   }
+  ],
+  "links": [
+   {
+    "label": "On the map",
+    "href": "https://go.2gis.com/BPOFS"
+   },
+   {
+    "label": "Food & drink",
+    "href": "TODO(content)"
+   },
+   {
+    "label": "Entertainment",
+    "href": "TODO(content)"
+   }
+  ],
+  "partners": [
+   "Marketplace of business assets and collateral",
+   "Unified system for bankruptcy proceedings"
+  ],
+  "policy": {
+   "label": "Personal data processing policy",
+   "href": "https://bankrufeast.ru/soglasie"
+  },
+  "copyright": "© 2026, Sber",
+  "attribution": "Map: © OpenStreetMap contributors; terrain: Copernicus DEM GLO-30"
+ },
+ "broadcastLinks": [
+  "https://www.sberbank.ru/ru/sbertv/article?video=VMd3MK",
+  "https://www.sberbank.ru/ru/sbertv/article?video=rdwG3X"
+ ],
+ "presentations": "https://disk.yandex.ru/d/tmyJ6x-2no07kg"
+}

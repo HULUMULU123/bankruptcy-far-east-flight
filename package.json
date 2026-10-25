@@ -1,0 +1,23 @@
+{
+  "name": "bankruptcy-far-east-v6",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1 --port 5176",
+    "build": "vite build",
+    "preview": "vite preview",
+    "data": "cd scripts && python3 01_resolve_anchors.py && python3 02_fetch_osm.py && python3 03_fetch_dem.py && python3 04_build_geometry.py"
+  },
+  "dependencies": {
+    "@fontsource-variable/jetbrains-mono": "^5.3.0",
+    "@fontsource-variable/onest": "^5.3.1",
+    "@fontsource/onest": "^5.3.1",
+    "three": "^0.186.1",
+    "troika-three-text": "^0.52.4"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.1",
+    "vite": "^8.3.5"
+  }
+}

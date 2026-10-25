@@ -1,0 +1,82 @@
+{
+ "_source": "https://bankrufeast.ru/ (выгрузка вручную для M3; полный парсинг — scripts/05_scrape_content.py, M5)",
+ "hero": {
+  "title": "Банкротство Дальний Восток",
+  "titleEn": "Bankruptcy Far East",
+  "subtitle": "Международный форум",
+  "dates": "29–30 июля 2026",
+  "venue": "VLADIVOSTOK Grand Hotel&Spa",
+  "ctaParticipate": "Участие",
+  "ctaBroadcast": "Смотреть трансляцию",
+  "scrollHint": "Листайте вниз"
+ },
+ "finale": {
+  "addressPanel": [
+   "VLADIVOSTOK Grand Hotel&Spa",
+   "Корабельная Набережная, 10",
+   "690091, Владивосток"
+  ],
+  "contacts": [
+   {
+    "name": "Ольга Коренкова",
+    "email": "OPKorenkova@sberbank.ru",
+    "phone": "+7 (914) 202 49 92",
+    "address": "г. Хабаровск, ул. Гамарника, 12"
+   },
+   {
+    "name": "Олег Ильин",
+    "email": "ogiliin@sberbank.ru",
+    "phone": "+7 (914) 158 13 11",
+    "address": "г. Хабаровск, ул. Гамарника, 12"
+   }
+  ],
+  "links": [
+   {
+    "label": "На карте",
+    "href": "https://go.2gis.com/BPOFS"
+   },
+   {
+    "label": "Рестораны и кафе",
+    "href": "TODO(content)"
+   },
+   {
+    "label": "Досуг и развлечения",
+    "href": "TODO(content)"
+   }
+  ],
+  "partners": [
+   "Маркетплейс бизнес-активов и залогового имущества",
+   "Единая система по ведению процедур банкротства"
+  ],
+  "policy": {
+   "label": "Политика в отношении обработки персональных данных",
+   "href": "https://bankrufeast.ru/soglasie"
+  },
+  "copyright": "© 2026, Сбер",
+  "attribution": "Карта: © участники OpenStreetMap; рельеф: Copernicus DEM GLO-30"
+ },
+ "ui": {
+  "nav": [
+   "О форуме",
+   "Программа",
+   "Спикеры",
+   "Участие",
+   "Контакты"
+  ],
+  "skip": "Пропустить пролёт",
+  "restart": "Начать сначала",
+  "broadcastTitle": "Трансляция",
+  "broadcast": [
+   "Трансляция 1",
+   "Трансляция 2"
+  ],
+  "close": "Закрыть",
+  "progress": "Ход пролёта",
+  "loading": "Загрузка"
+ },
+ "broadcastLinks": [
+  "https://www.sberbank.ru/ru/sbertv/article?video=VMd3MK",
+  "https://www.sberbank.ru/ru/sbertv/article?video=rdwG3X"
+ ],
+ "presentations": "https://disk.yandex.ru/d/tmyJ6x-2no07kg"
+}

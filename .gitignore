@@ -1,0 +1,6 @@
+node_modules
+dist
+scripts/cache
+docs/milestones
+docs/audit-shots
+.DS_Store

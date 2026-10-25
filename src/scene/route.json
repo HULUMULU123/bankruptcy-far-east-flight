@@ -1,0 +1,286 @@
+{
+ "stops": [
+  {
+   "id": "intro",
+   "anchor": "golden_bridge",
+   "pStart": 0,
+   "pEnd": 0.07,
+   "camera": {
+    "distance": 7000,
+    "height": 750,
+    "azimuth": 190,
+    "fov": 40,
+    "targetY": 0
+   },
+   "reveal": {
+    "radius": 2400
+   },
+   "carriers": [
+    "C"
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "distance": 4300,
+     "height": 230,
+     "azimuth": 186,
+     "targetY": 430,
+     "fov": 42
+    },
+    {
+     "t": 1,
+     "distance": 2700,
+     "height": 150,
+     "azimuth": 190,
+     "targetY": 380,
+     "fov": 44
+    }
+   ]
+  },
+  {
+   "id": "about",
+   "anchor": "russky_pylon",
+   "pStart": 0.15,
+   "pEnd": 0.3,
+   "camera": {
+    "distance": 300,
+    "height": 120,
+    "azimuth": 230,
+    "fov": 45,
+    "targetY": 120
+   },
+   "reveal": {
+    "radius": 1100
+   },
+   "carriers": [
+    "A",
+    "B"
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "distance": 850,
+     "height": 70,
+     "azimuth": 325,
+     "targetY": 150,
+     "fov": 46
+    },
+    {
+     "t": 0.5,
+     "distance": 680,
+     "height": 200,
+     "azimuth": 322,
+     "targetY": 200,
+     "fov": 46
+    },
+    {
+     "t": 1,
+     "distance": 520,
+     "height": 330,
+     "azimuth": 318,
+     "targetY": 250,
+     "fov": 46
+    }
+   ]
+  },
+  {
+   "id": "program",
+   "anchor": "golden_bridge",
+   "pStart": 0.39,
+   "pEnd": 0.58,
+   "camera": {
+    "distance": 500,
+    "height": 90,
+    "azimuth": 180,
+    "fov": 50,
+    "targetY": 60
+   },
+   "reveal": {
+    "radius": 1300
+   },
+   "carriers": [
+    "C",
+    "D",
+    "B"
+   ],
+   "kind": "deck",
+   "axis": "golden",
+   "keys": [
+    {
+     "t": 0,
+     "along": -760,
+     "height": 40,
+     "lookAhead": 170,
+     "pitch": 12,
+     "fov": 58
+    },
+    {
+     "t": 0.5,
+     "along": -80,
+     "height": 36,
+     "lookAhead": 170,
+     "pitch": 12,
+     "fov": 58
+    },
+    {
+     "t": 1,
+     "along": 600,
+     "height": 40,
+     "lookAhead": 170,
+     "pitch": 12,
+     "fov": 58
+    }
+   ]
+  },
+  {
+   "id": "speakers",
+   "anchor": "station",
+   "pStart": 0.62,
+   "pEnd": 0.77,
+   "camera": {
+    "distance": 500,
+    "height": 160,
+    "azimuth": 250,
+    "fov": 45,
+    "targetY": 10
+   },
+   "reveal": {
+    "radius": 900
+   },
+   "carriers": [
+    "D",
+    "B"
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "distance": 520,
+     "height": 190,
+     "azimuth": 250,
+     "targetY": 10
+    },
+    {
+     "t": 0.5,
+     "distance": 470,
+     "height": 150,
+     "azimuth": 310,
+     "targetY": 10
+    },
+    {
+     "t": 1,
+     "distance": 450,
+     "height": 125,
+     "azimuth": 370,
+     "targetY": 10
+    }
+   ]
+  },
+  {
+   "id": "join",
+   "anchor": "tokarevsky_lighthouse",
+   "pStart": 0.85,
+   "pEnd": 0.93,
+   "camera": {
+    "distance": 600,
+    "height": 30,
+    "azimuth": 0,
+    "fov": 45,
+    "targetY": 10
+   },
+   "reveal": {
+    "radius": 900
+   },
+   "carriers": [
+    "A",
+    "E"
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "distance": 900,
+     "height": 26,
+     "azimuth": 0,
+     "targetY": 24
+    },
+    {
+     "t": 0.4,
+     "distance": 300,
+     "height": 22,
+     "azimuth": 0,
+     "targetY": 22
+    },
+    {
+     "t": 0.7,
+     "distance": 260,
+     "height": 60,
+     "azimuth": 300,
+     "targetY": 24
+    },
+    {
+     "t": 0.8,
+     "distance": 330,
+     "height": 105,
+     "azimuth": 205,
+     "targetY": 40
+    },
+    {
+     "t": 1,
+     "distance": 330,
+     "height": 105,
+     "azimuth": 205,
+     "targetY": 40
+    }
+   ]
+  },
+  {
+   "id": "finale",
+   "anchor": "hotel",
+   "pStart": 0.97,
+   "pEnd": 1.0,
+   "camera": {
+    "distance": 450,
+    "height": 250,
+    "azimuth": 200,
+    "fov": 45,
+    "targetY": 15
+   },
+   "reveal": {
+    "radius": 1000
+   },
+   "carriers": [
+    "A",
+    "E"
+   ],
+   "keys": [
+    {
+     "t": 0,
+     "distance": 450,
+     "height": 250,
+     "azimuth": 200
+    },
+    {
+     "t": 1,
+     "distance": 410,
+     "height": 310,
+     "azimuth": 176
+    }
+   ]
+  }
+ ],
+ "shader": {
+  "sizeFar": 0.8,
+  "sizeNear": 2.0,
+  "dprMax": 2
+ },
+ "maxAngularDegPerSec": 22,
+ "maxAngularDegPerSecScatter": 70,
+ "pages": 30,
+ "scrollWeights": [
+  1.6,
+  3.2,
+  4.8,
+  6.5,
+  3.4,
+  1.8
+ ]
+}
