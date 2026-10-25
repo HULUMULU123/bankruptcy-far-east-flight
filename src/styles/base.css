@@ -187,3 +187,11 @@ button.co:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 
 
 .only-m { display: none; }
 @media (max-width: 900px) { .tools__skip { display: none; } .only-m { display: block; } .tools { gap: var(--s-2); } }
+
+@media (max-width: 700px) {
+  .overlay--finale { max-height: 40vh; padding: 28px var(--s-4) var(--s-3); background: linear-gradient(transparent, rgba(7, 9, 11, 0.9) 22%); }
+  .fin__place .kicker { display: none; }
+  .fin__addr { font-size: var(--fs-1); margin: 0 0 var(--s-1); }
+  .fin__place .links, .overlay--finale .foot { display: none; }
+  .fin__act { grid-column: 1 / -1; }
+}
