@@ -112,6 +112,10 @@ const stops = route.stops;
   stops[0].kind = 'tour'; stops[0].anchor = 'tokarevsky_lighthouse';
   stops[0].keys = [{ t: 0, ...at(300, 90, 120, 1800, 10) }, { t: 1, ...at(-380, 50, 170, 1800, 20) }];
 }
+{ // Золотой мост пролетаем целиком: от въезда до съезда, через проём между пилонами (камера между плоскостями вант)
+  const g = landmarks.golden, a0 = -g.mid + 40, a1 = g.length - g.mid - 40, k = { height: 38, lookAhead: 220, pitch: 13, fov: 58 };
+  stops[2].keys = [0, 0.25, 0.5, 0.75, 1].map((t) => ({ t, along: a0 + (a1 - a0) * t, ...k }));
+}
 // 24 маячка по кругу (по углу вокруг центра) ↔ 24 спикера в порядке программы; камера тура обходит их по очереди
 const beacons = (() => {
   const cx = meta.beacons.reduce((a, b) => a + b.x, 0) / meta.beacons.length, cz = meta.beacons.reduce((a, b) => a + b.z, 0) / meta.beacons.length;
@@ -146,7 +150,10 @@ const scroll = createScroll({ stops, reduced, rate: (P) => rig.rateAt(P), cap: (
   { const k = Math.max(0, 1 - P / 0.05) * (reduced ? 0 : 1), tt = performance.now() / 1000; camera.position.x += Math.sin(tt * 0.17) * 5 * k; camera.position.y += Math.sin(tt * 0.23) * 1.6 * k; camera.position.z += Math.cos(tt * 0.13) * 5 * k; }   // дыхание кадра в первом экране
   camera.lookAt(pose.tgt);
   if (DEBUG && window.__camOverride) window.__camOverride(camera);
-  if (Math.abs(camera.fov - pose.fov) > 0.01) { camera.fov = pose.fov; camera.updateProjectionMatrix(); }
+  { // портретный экран: сохраняем горизонтальный охват как на десктопе (иначе маяк, форма и панели вылетают за кадр)
+    let fv = pose.fov; const asp = innerWidth / innerHeight;
+    if (asp < 1.4) { const h = 2 * Math.atan(Math.tan((pose.fov * Math.PI) / 360) * 1.45); fv = Math.min(((2 * Math.atan(Math.tan(h / 2) / asp)) * 180) / Math.PI, 102); }
+    if (Math.abs(camera.fov - fv) > 0.01) { camera.fov = fv; camera.updateProjectionMatrix(); } }
   const s = stops[st.focus], a = A[s.anchor];
   U.uFocus.value.set(a.x, 0, a.z);
   // экспозиция при загрузке: город проявляется от берега за 4 с, независимо от скролла
@@ -155,6 +162,7 @@ const scroll = createScroll({ stops, reduced, rate: (P) => rig.rateAt(P), cap: (
   U.uRadius.value = s.reveal.radius * (st.focus === 0 ? 0.25 + 0.75 * bootGate : 1);
   U.uScatter.value = reduced ? 0 : st.scatter; U.uProgressReveal.value = reduced ? 1 : st.reveal;
   carriers[1] && (carriers[1].visible = P > 0.9);
+  if (stopsInfo) stopsInfo.state.aboutPanel.visible = innerWidth >= 700 && P > stops[1].pStart - 0.02 && P < stops[1].pEnd + 0.02;
   lighthouse.__ang = reduced ? 0.93 : (performance.now() / 1000) * 0.55; lighthouse.setAngle(lighthouse.__ang);   // огонь на маяке вращается постоянно
   const active = st.active;
   if (active !== prevActive) { if (active >= 0 && !reduced && !q.has('still')) pulseT0 = performance.now(); prevActive = active; }

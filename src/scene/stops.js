@@ -45,7 +45,7 @@ export function createStops({ scene, camera, A, landmarks, meta, program, rig, r
   program.about.topics.forEach((t, i) => {
     const c = chosen[i], f = 0.45 + i * 0.07, p0 = S1.pStart + 0.012 + i * 0.022;
     topicEls[i] = callouts.add({ id: `topic${i}`, world: new THREE.Vector3(c.dk[0] + (c.apex[0] - c.dk[0]) * f, c.dk[1] + (c.apex[1] - c.dk[1]) * f, c.dk[2] + (c.apex[2] - c.dk[2]) * f),
-      title: t, dx: 1, dy: 0, place: (W, H) => { if (W < 700) { let y = H * 0.5; for (let k = 0; k < i; k++) y += (topicEls[k]?.el.offsetHeight || 52) + 8; return [16, y + (topicEls[i]?.el.offsetHeight || 52) / 2]; } let y = Math.max(96, H * 0.24); for (let k = 0; k < i; k++) y += (topicEls[k]?.el.offsetHeight || 64) + 14; return [Math.max(24, W * 0.03), y + (topicEls[i]?.el.offsetHeight || 64) / 2]; }, win: [p0, S1.pEnd + 0.005], fade: 0.01, onClick: () => open({ title: t, sub: 'О форуме', body: program.about.full }, () => new THREE.Vector3(c.dk[0] + (c.apex[0] - c.dk[0]) * f, c.dk[1] + (c.apex[1] - c.dk[1]) * f, c.dk[2] + (c.apex[2] - c.dk[2]) * f)) });
+      title: t, dx: 1, dy: 0, place: (W, H) => { if (W < 700) { let y = H * 0.56; for (let k = 0; k < i; k++) y += (topicEls[k]?.el.offsetHeight || 52) + 8; return [16, y + (topicEls[i]?.el.offsetHeight || 52) / 2]; } let y = Math.max(96, H * 0.24); for (let k = 0; k < i; k++) y += (topicEls[k]?.el.offsetHeight || 64) + 14; return [Math.max(24, W * 0.03), y + (topicEls[i]?.el.offsetHeight || 64) / 2]; }, win: [p0, S1.pEnd + 0.005], fade: 0.01, onClick: () => open({ title: t, sub: 'О форуме', body: program.about.full }, () => new THREE.Vector3(c.dk[0] + (c.apex[0] - c.dk[0]) * f, c.dk[1] + (c.apex[1] - c.dk[1]) * f, c.dk[2] + (c.apex[2] - c.dk[2]) * f)) });
   });
 
   // ================= Остановка 2: «Программа» — настил Золотого моста =================
@@ -156,7 +156,7 @@ export function createStops({ scene, camera, A, landmarks, meta, program, rig, r
 
   function update(P, now, dt) {
     state.P = P;
-    state.aboutPanel.visible = P > S1.pStart - 0.02 && P < S1.pEnd + 0.02;
+    state.aboutPanel.visible = innerWidth >= 700 && P > S1.pStart - 0.02 && P < S1.pEnd + 0.02;
     cableMats.forEach((m, i) => { m.opacity = sm(S1.pStart + 0.012 + i * 0.022, S1.pStart + 0.028 + i * 0.022, P) * (1 - sm(S1.pEnd - 0.01, S1.pEnd + 0.015, P)); });
     const inS2 = P > S2.pStart - 0.04 && P < S2.pEnd + 0.04;
     state.nearest = null; state.nearD = 1e9;

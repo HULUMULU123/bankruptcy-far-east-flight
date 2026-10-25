@@ -16,14 +16,14 @@ export function mountUI({ stopsCount, onAction, onNav, onLang, onDay, lang = 'ru
   panel.hidden = true; panel.setAttribute('role', 'dialog'); panel.setAttribute('aria-label', 'Трансляция');
   const detail = el('aside', 'detail'); detail.hidden = true; detail.setAttribute('role', 'dialog'); detail.setAttribute('aria-modal', 'false');
   const progBar = el('section', 'daybar');
-  root.append(header, intro, fin, prog, panel, detail, progBar);
+  const aboutM = el('section', 'about-m'); root.append(header, intro, fin, prog, panel, detail, progBar, aboutM);
   const marks = [];
 
   function render() {
     content = C[L]; const h = content.hero, f = content.finale, u = content.ui;
     header.innerHTML = `<a class="brand" href="#" data-act="restart" aria-label="Сбер — Банкротство Дальний Восток: сначала"><img src="${import.meta.env.BASE_URL}sber.svg" alt="Сбер" height="24"><span>Bankruptcy Far East</span></a>
-      <nav class="menu" aria-label="Main">${u.nav.map((t, i) => `<button class="link" data-nav="${NAV_STOPS[i]}">${t}</button>`).join('')}</nav>
-      <div class="tools"><button class="link" data-act="skip">${u.skip}</button>
+      <nav class="menu" aria-label="Main">${u.nav.map((t, i) => `<button class="link" data-nav="${NAV_STOPS[i]}">${t}</button>`).join('')}<button class="link only-m" data-act="skip">${u.skip}</button></nav>
+      <div class="tools"><button class="burger" data-act="menu" aria-label="Меню" aria-expanded="false"><i></i><i></i></button><button class="link tools__skip" data-act="skip">${u.skip}</button>
       <span class="lang" role="group" aria-label="Language"><button class="link ${L === 'ru' ? 'cur' : ''}" data-lang="ru">RU</button><button class="link ${L === 'en' ? 'cur' : ''}" data-lang="en">EN</button></span></div>`;
     intro.innerHTML = `<div class="hero__text"><p class="kicker"><i></i>${h.subtitle}</p><h1>${h.title}</h1>
         <p class="when">${h.dates}</p><p class="meta">${h.venue}</p></div>
@@ -37,6 +37,7 @@ export function mountUI({ stopsCount, onAction, onNav, onLang, onDay, lang = 'ru
         <div class="fin__act"><button class="btn btn--primary" data-act="join">${h.ctaParticipate}</button><button class="btn btn--tertiary" data-act="restart">${u.restart}</button></div>
       </div>
       <p class="foot dim">${f.partners.join(' · ')} · ${link(f.policy)} · ${f.copyright} · ${f.attribution}</p>`;
+    aboutM.innerHTML = `<h2>${content.ui.nav[0]}</h2><p>${program.about.short}</p>`;
     hint.textContent = h.scrollHint;
     progBar.innerHTML = `<div class="seg" role="group" aria-label="День"><button class="link cur" data-day="1">29 июля</button><button class="link" data-day="2">30 июля</button></div>
       <p class="note">${program.note}* <a href="${program.presentations}" target="_blank" rel="noopener">Презентации спикеров</a></p>`;
@@ -54,8 +55,9 @@ export function mountUI({ stopsCount, onAction, onNav, onLang, onDay, lang = 'ru
     const a = e.target.closest('[data-act]'), n = e.target.closest('[data-nav]'), g = e.target.closest('[data-lang]'), dd = e.target.closest('[data-day]');
     if (dd) { progBar.querySelectorAll('[data-day]').forEach((b) => b.classList.toggle('cur', b === dd)); onDay(Number(dd.dataset.day)); return; }
     if (g) { L = g.dataset.lang; render(); onLang(L); return; }
-    if (n) { onNav(Number(n.dataset.nav)); return; }
+    if (n) { header.classList.remove('open'); onNav(Number(n.dataset.nav)); return; }
     if (!a) return;
+    if (a.dataset.act === 'menu') { const o = header.classList.toggle('open'); a.setAttribute('aria-expanded', String(o)); return; }
     if (a.dataset.act === 'broadcast') { const live = intro.querySelector('.live'); live.hidden = !live.hidden; a.setAttribute('aria-expanded', String(!live.hidden)); if (!live.hidden) live.querySelector('a').focus(); return; }
     if (a.dataset.act === 'close') { panel.hidden = true; detail.hidden = true; return; }
     onAction(a.dataset.act);
@@ -70,6 +72,7 @@ export function mountUI({ stopsCount, onAction, onNav, onLang, onDay, lang = 'ru
       detail.hidden = false; detail.querySelector('[data-act="close"]').focus();
     },
     update(active, P, touched, gate = 1) {
+      aboutM.classList.toggle('on', active === 1 && P > 0.14 && P < 0.31);
       progBar.classList.toggle('on', active === 2 && P > 0.36 && P < 0.6);
       intro.classList.toggle('on', P < 0.06 && gate > 0.6);
       fin.classList.toggle('on', P > 0.95);
